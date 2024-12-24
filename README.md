@@ -1,138 +1,66 @@
+# Flappy Bird Console Game: Documentation
 
-# **Documentation for Bird Game Code**
-
-## **Overview**
-This is a simple console-based game written in C++ where a player controls a bird (`&`) that must avoid obstacles (`|`). The game includes functions to initialize the game map, move obstacles, move the bird, render the map, and manage game mechanics.
+This document explains how the Flappy Bird console game works and how to use the code.
 
 ---
 
-## **File Structure**
+## Overview
 
-### **Headers and Libraries**
-1. **`#include <iostream>`** - For input/output operations.
-2. **`#include <conio.h>`** - For detecting keyboard input (`getch()` and `kbhit()`).
-3. **`#include <time.h>`** - For generating random numbers (`srand` and `rand`).
-4. **`#include <windows.h>`** - For cursor positioning (`SetConsoleCursorPosition`) and delays (`Sleep`).
-5. **`#include <sstream>`** - For efficient string manipulation in `render`.
+This game lets you control a bird in a console window, avoiding obstacles while trying to score as many points as possible. The bird moves up when you press a key and falls due to gravity.
 
 ---
 
-## **Main Function**
+## How to Run the Code
 
-### **Structure**
-1. Initializes game variables:
-   - `score` (int): Tracks the player's score.
-   - `hp` (bool): Represents the bird's health (alive or dead).
-   - `x` (int): The bird's vertical position.
-   - `Obs[3]`: Array of 3 obstacles.
-   - `map[20][30]`: 2D array representing the game field.
+1. **Compile**:
 
-2. The game runs in a loop as long as the user chooses to retry (`repeat`).
+   ```bash
+   g++ -o flappybird flappybird.cpp -std=c++11
+   ```
 
-3. **Key Actions in the Loop:**
-   - Obstacles move (`obstacleMove`).
-   - Bird moves based on player input (`birdMove`).
-   - Map is updated and displayed (`render`).
-
-4. At game over:
-   - Displays the current score and the high score.
-   - Prompts the player to retry.
+2. **Run**:
+   ```bash
+   ./flappybird
+   ```
 
 ---
 
-## **Functions**
+## How to Play
 
-### 1. **`void initMap(string map[20][30], Obstacle Obs[3])`**
-Initializes the game map and sets the initial positions of the obstacles.
-
-- **Parameters:**
-  - `map[20][30]`: The 2D array representing the game field.
-  - `Obs[3]`: Array of obstacles.
-
-- **Steps:**
-  1. Obstacles are placed at specific horizontal positions (`Obs[i].x`) and random vertical positions (`Obs[i].y`).
-  2. Borders and blank spaces are drawn in the map.
+1. **Controls**: Press any key to move the bird up. The bird falls automatically.
+2. **Goal**: Avoid hitting obstacles or the map's edges.
+3. **Scoring**: Gain 1 point for every obstacle passed.
+4. **Levels**: Difficulty increases every 5 points up to level 15.
 
 ---
 
-### 2. **`void obstacleMove(string map[20][30], Obstacle Obs[3])`**
-Handles the movement of obstacles.
+## Code Structure
 
-- **Parameters:**
-  - `map[20][30]`: The game map.
-  - `Obs[3]`: Array of obstacles.
+### Main Components
 
-- **Steps:**
-  1. Clears the current obstacle positions from the map.
-  2. Moves each obstacle one step left.
-  3. Resets obstacles to the right side of the screen once they reach the left boundary.
-  4. Updates the map with the new obstacle positions.
+1. **`Obstacle` struct**: Stores obstacle positions.
+2. **Functions**:
+   - Game setup and updates.
+   - Obstacle and bird movement.
+   - Map rendering.
+3. **Main Game Loop**:
+   - Handles the gameplay, user input, and game restarts.
 
----
+### Key Functions
 
-### 3. **`void birdMove(string map[20][30], Obstacle Obs[3], int *x, bool *hp, int *score)`**
-Handles the bird's movement and collision detection.
-
-- **Parameters:**
-  - `map[20][30]`: The game map.
-  - `Obs[3]`: Array of obstacles.
-  - `x`: Pointer to the bird's vertical position.
-  - `hp`: Pointer to the bird's health (true = alive, false = dead).
-  - `score`: Pointer to the player's score.
-
-- **Steps:**
-  1. Detects keyboard input to move the bird upward.
-  2. The bird gradually moves downward (gravity effect).
-  3. Checks for collisions with obstacles or the map boundaries.
-  4. Updates the score when the bird successfully avoids obstacles.
+- **`initMap`**: Sets up the game map and initial obstacle positions.
+- **`obstacleMove`**: Moves obstacles and resets them when they exit the map.
+- **`birdMove`**: Moves the bird, checks collisions, and updates the score.
+- **`render`**: Draws the game map, score, and level on the console.
+- **`setCursorPosition`**: Adjusts the cursor position for smooth display updates.
 
 ---
 
-### 4. **`void render(string map[20][30], int score)`**
-Displays the current state of the game.
+## Requirements
 
-- **Parameters:**
-  - `map[20][30]`: The game map.
-  - `score`: The player's current score.
-
-- **Steps:**
-  1. Constructs a string representation of the game map.
-  2. Includes the score at the bottom of the map.
-  3. Uses `setCursorPosition` to refresh the display without scrolling.
+- Windows system (uses `<windows.h>` for cursor control).
+- Console large enough for the game map.
 
 ---
 
-### 5. **`void setCursorPosition(int x, int y)`**
-Positions the cursor at a specified location on the console for smooth rendering.
-
-- **Parameters:**
-  - `x`: The horizontal coordinate.
-  - `y`: The vertical coordinate.
-
-- **Details:**
-  - Uses `SetConsoleCursorPosition` from the Windows API to control the cursor position.
-
----
-
-## **Gameplay Instructions**
-1. Use any key to move the bird upward.
-2. Avoid the obstacles (`|`) as they move from right to left.
-3. The score increases when the bird successfully passes an obstacle.
-4. The game ends if the bird collides with an obstacle or the borders.
-
----
-
-## **Known Issues**
-1. **Randomization:** `(rand() - 1) % 12 + 2` is incorrect for generating obstacle positions. Use `(rand() % 12) + 2` instead.
-2. **Compatibility:** This code is designed for Windows due to its dependency on `<windows.h>`.
-
---- 
-
-## **Possible Improvements**
-1. **Refactoring:** Use constants for map dimensions and obstacle properties for easier adjustments.
-2. **Cross-Platform Support:** Replace Windows-specific functions with standard cross-platform libraries.
-3. **Enhanced Gameplay:**
-   - Add difficulty levels.
-   - Introduce power-ups or penalties.
-
----
+Enjoy playing!
