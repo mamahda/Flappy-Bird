@@ -1,6 +1,3 @@
-Below is a documentation for the provided code:
-
----
 
 # **Documentation for Bird Game Code**
 
