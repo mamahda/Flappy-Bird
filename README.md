@@ -58,7 +58,7 @@ This game lets you control a bird in a console window, avoiding obstacles while 
 
 ## Requirements
 
-- Windows system (uses `<windows.h>` for cursor control).
+- ~~Windows system (uses `<windows.h>` for cursor control).~~ now you can play in linux too
 - Console large enough for the game map.
 
 ---
