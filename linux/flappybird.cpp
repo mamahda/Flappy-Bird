@@ -31,6 +31,7 @@ int main()
     while (repeat == 'y' || repeat == 'Y')
     {
         system("clear");
+        stringstream buffer;
         bool hp = true;
         int x = 9, level = 0, score = 0;
         int speed[15] = {150, 145, 135, 130, 125, 120, 115, 110, 105, 100, 95, 90, 85, 80, 75};
@@ -51,12 +52,15 @@ int main()
             }
         }
 
-        setCursorPosition(0, 21); // Move cursor to the bottom for messages
-        cout << "Score = " << score << endl;
+        setCursorPosition(0, 21); // Move cursor to the bottom for messages 
+        buffer << endl;
+        buffer << "Game Over!" << endl;
+        buffer << "Score = " << score << endl;
         if (highscore < score)
             highscore = score;
-        cout << "Highscore = " << highscore << endl;
-        cout << "retry?(y/n) = ";
+        buffer << "Highscore = " << highscore << endl;
+        buffer << "retry?(y/n) = ";
+        cout << buffer.str();
         cin >> repeat;
     }
     return 0;
